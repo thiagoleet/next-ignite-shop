@@ -5,7 +5,17 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const priceId = "price_1QebGxPH7Dpg9FhXCSzcLobI";
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    return res.status(405).end("Method Not Allowed");
+  }
+
+  const { priceId } = req.body;
+
+  if (!priceId) {
+    res.status(400).json({ error: "Price ID is required" });
+  }
+
   const successUrl = `${process.env.NEXT_URL}/success`;
   const cancelUrl = `${process.env.NEXT_URL}`;
 
