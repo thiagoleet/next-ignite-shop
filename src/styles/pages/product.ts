@@ -45,7 +45,7 @@ export const ProductDetails = styled("div", {
     marginTop: "2.5rem",
     fontSize: "$md",
     lineHeight: 1.6,
-    color: "$green300",
+    color: "$gray300",
   },
 
   button: {
