@@ -1,9 +1,12 @@
+import { GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import Head from "next/head";
+
 import axios from "axios";
 import React from "react";
 import Stripe from "stripe";
-import { GetStaticPaths, GetStaticProps } from "next";
-import Image from "next/image";
-import { useRouter } from "next/router";
+
 import {
   ImageContainer,
   ProductContainer,
@@ -50,27 +53,32 @@ export default function ProductPage({ product }: ProductProps) {
   }
 
   return (
-    <ProductContainer>
-      <ImageContainer>
-        <Image
-          src={product.imageUrl}
-          alt={product.name}
-          width={520}
-          height={480}
-        />
-      </ImageContainer>
-      <ProductDetails>
-        <h1>{product.name}</h1>
-        <span>{product.price}</span>
-        <p>{product.description}</p>
-        <button
-          onClick={handleBuyProduct}
-          disabled={isCreatingCheckoutSession}
-        >
-          Comprar agora
-        </button>
-      </ProductDetails>
-    </ProductContainer>
+    <>
+      <Head>
+        <title>{product.name} | Ignite Shop</title>
+      </Head>
+      <ProductContainer>
+        <ImageContainer>
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            width={520}
+            height={480}
+          />
+        </ImageContainer>
+        <ProductDetails>
+          <h1>{product.name}</h1>
+          <span>{product.price}</span>
+          <p>{product.description}</p>
+          <button
+            onClick={handleBuyProduct}
+            disabled={isCreatingCheckoutSession}
+          >
+            Comprar agora
+          </button>
+        </ProductDetails>
+      </ProductContainer>
+    </>
   );
 }
 
